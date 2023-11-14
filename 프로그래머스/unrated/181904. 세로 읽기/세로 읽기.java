@@ -1,6 +1,6 @@
 public class Solution {
     public String solution(String my_string, int m, int c) {
-        String answer = "";
+        StringBuilder answer = new StringBuilder();
         int answerLength = my_string.length() / m;
 
         if (my_string.length() % m >= c){
@@ -10,11 +10,11 @@ public class Solution {
         int index = c-1;
         for (int i = 0; i < answerLength; i++) {
 
-            answer += my_string.charAt(index);
+            answer.append(my_string.charAt(index));
             index += m;
         }
-        
-        return answer;
+
+        return answer.toString();
     }
 
     public static void main(String[] args) {
