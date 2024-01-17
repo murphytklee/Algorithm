@@ -1,7 +1,14 @@
 public class Solution {
     public String solution(String myString) {
-        String answer = myString.replaceAll("[a-k]", "l");
-        return answer;
+        StringBuilder answer = new StringBuilder();
+        for (char c : myString.toCharArray()) {
+            if (c <= 'l'){
+                answer.append('l');
+            } else {
+                answer.append(c);
+            }
+        }
+        return answer.toString();
     }
 
     public static void main(String[] args) {
