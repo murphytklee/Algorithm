@@ -6,16 +6,12 @@ public class Solution {
         Stack<Integer> stk = new Stack<>();
         int i = 0;
 
-        while (i < arr.length){
-            if (stk.isEmpty()){
-                stk.push(arr[i]);
-                i++;
-            } else if (stk.peek().equals(arr[i])) {
+        while (i < arr.length) {
+            int current = arr[i++];
+            if (!stk.isEmpty() && stk.peek().equals(current)) {
                 stk.pop();
-                i++;
             } else {
-                stk.push(arr[i]);
-                i++;
+                stk.push(current);
             }
         }
 
