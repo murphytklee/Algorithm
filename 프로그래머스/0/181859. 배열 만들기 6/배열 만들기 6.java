@@ -19,15 +19,16 @@ public class Solution {
             }
         }
 
-        if (stk.size() == 0){
-            return new int[]{-1};
-        } else {
-            int[] answer = new int[stk.size()];
-            for (int j = stk.size() - 1; j >= 0; j--) {
-                answer[j] = stk.pop();
-            }
-            return answer;
+        int size = stk.size();
+        return size > 0 ? createResultArray(stk, size) : new int[]{-1};
+    }
+
+    private int[] createResultArray(Stack<Integer> stk, int size) {
+        int[] answer = new int[size];
+        for (int j = size - 1; j >= 0; j--) {
+            answer[j] = stk.pop();
         }
+        return answer;
     }
 
     public static void main(String[] args) {
