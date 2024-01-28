@@ -3,12 +3,17 @@ import java.util.Arrays;
 public class Solution {
     public String[] solution(String myString) {
         String[] answer  = myString.replaceAll(" ", "").split("x");
-
-        answer = Arrays.stream(answer)
-                .filter(s -> !s.isEmpty())
-                .toArray(String[]::new);
         
+        int count = 0;
+        for (int i = 0; i < answer.length; i++) {
+            if (!answer[i].isEmpty()) {
+                answer[count++] = answer[i];
+            }
+        }
+
+        answer = Arrays.copyOf(answer, count);
         Arrays.sort(answer);
+        
         return answer;
     }
 
