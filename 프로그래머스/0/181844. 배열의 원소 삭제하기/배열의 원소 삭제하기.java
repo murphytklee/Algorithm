@@ -9,14 +9,19 @@ public class Solution {
             deleteSet.add(num);
         }
 
-        ArrayList<Integer> answer = new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
         for (int num : arr) {
             if (!deleteSet.contains(num)) {
-                answer.add(num);
+                list.add(num);
             }
         }
+        
+        int[] answer = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            answer[i] = list.get(i);
+        }
 
-        return answer.stream().mapToInt(Integer::intValue).toArray();
+        return answer;
     }
 
     public static void main(String[] args) {
