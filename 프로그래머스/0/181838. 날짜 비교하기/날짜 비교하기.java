@@ -1,16 +1,8 @@
-import java.time.LocalDate;
+import java.util.Arrays;
 
 public class Solution {
     public int solution(int[] date1, int[] date2) {
-        LocalDate localDate1 = LocalDate.of(date1[0], date1[1], date1[2]);
-        LocalDate localDate2 = LocalDate.of(date2[0], date2[1], date2[2]);
-        int answer;
-
-        if (localDate1.isBefore(localDate2)){
-            answer = 1;
-        } else answer = 0;
-
-        return answer;
+        return Arrays.compare(date1, date2) < 0 ? 1 : 0;
     }
 
     public static void main(String[] args) {
