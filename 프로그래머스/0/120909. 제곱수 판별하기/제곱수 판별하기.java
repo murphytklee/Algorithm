@@ -1,11 +1,6 @@
 public class Solution {
     public int solution(int n) {
-        double x = Math.sqrt(n);
-        if (x - (int) x == 0){
-            return 1;
-        } else {
-            return 2;
-        }
+        return Math.sqrt(n) % 1 == 0 ? 1 : 2;
     }
 
     public static void main(String[] args) {
