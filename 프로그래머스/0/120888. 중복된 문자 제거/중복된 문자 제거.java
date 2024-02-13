@@ -1,21 +1,20 @@
-import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Solution {
     public String solution(String my_string) {
-        ArrayList<Character> list = new ArrayList<>();
-        StringBuilder answer = new StringBuilder();
-        
+        Set<Character> uniqueChars = new LinkedHashSet<>();
+
         for (char c : my_string.toCharArray()) {
-            if (!list.contains(c)){
-                list.add(c);
-            }
+            uniqueChars.add(c);
         }
 
-        for (Character character : list) {
-            answer.append(character);
+        StringBuilder result = new StringBuilder();
+        for (char c : uniqueChars) {
+            result.append(c);
         }
 
-        return answer.toString();
+        return result.toString();
     }
 
     public static void main(String[] args) {
