@@ -1,39 +1,42 @@
 import java.io.*;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
         int n = Integer.parseInt(br.readLine());
-        ArrayList<Integer> diffIndex = new ArrayList<>();
-        String line = br.readLine();
-        StringBuilder answer = new StringBuilder();
+        String[] fileNames = new String[n];
 
-        for (int i = 0; i < n - 1; i++) {
-            String compareLine = br.readLine();
-            for (int j = 0; j < line.length(); j++) {
-                if (diffIndex.contains(j)){
-                    continue;
-                }
-                if (line.charAt(j) != compareLine.charAt(j)){
-                    diffIndex.add(j);
-                }
-            }
+        for (int i = 0; i < n; i++) {
+            fileNames[i] = br.readLine();
         }
 
-        for (int i = 0; i < line.length(); i++) {
-            if (diffIndex.contains(i)){
-                answer.append("?");
-            } else {
-                answer.append(line.charAt(i));
-            }
-        }
+        String pattern = findPattern(fileNames);
 
-
-        bw.write(answer.toString());
+        bw.write(pattern);
         bw.flush();
         br.close();
         bw.close();
+    }
+
+    private static String findPattern(String[] fileNames) {
+        StringBuilder pattern = new StringBuilder();
+
+        for (int i = 0; i < fileNames[0].length(); i++) {
+            char currentChar = fileNames[0].charAt(i);
+            boolean isWildcard = false;
+
+            for (int j = 1; j < fileNames.length; j++) {
+                if (fileNames[j].charAt(i) != currentChar) {
+                    isWildcard = true;
+                    break;
+                }
+            }
+
+            pattern.append(isWildcard ? "?" : currentChar);
+        }
+
+        return pattern.toString();
     }
 }
