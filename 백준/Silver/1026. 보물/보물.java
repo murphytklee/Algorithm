@@ -1,8 +1,7 @@
 import java.io.*;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -10,15 +9,19 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int n = Integer.parseInt(br.readLine());
-        List<Integer> A = Arrays.stream(br.readLine().split(" "))
-                .map(Integer::parseInt)
-                .sorted()
-                .collect(Collectors.toList());
+        StringTokenizer stA = new StringTokenizer(br.readLine());
+        StringTokenizer stB = new StringTokenizer(br.readLine());
 
-        List<Integer> B = Arrays.stream(br.readLine().split(" "))
-                .map(Integer::parseInt)
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
+        ArrayList<Integer> A = new ArrayList<>();
+        ArrayList<Integer> B = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            A.add(Integer.parseInt(stA.nextToken()));
+            B.add(Integer.parseInt(stB.nextToken()));
+        }
+
+        Collections.sort(A);
+        Collections.sort(B, Collections.reverseOrder());
 
         int answer = 0;
 
