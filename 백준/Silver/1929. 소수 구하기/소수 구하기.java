@@ -10,13 +10,21 @@ public class Main {
         int M = Integer.parseInt(st.nextToken());
         int N = Integer.parseInt(st.nextToken());
 
-        // 1 은 Prime Number 가 아니다
-        if (M < 2) {
-            M = 2;
+        boolean[] isPrime = new boolean[N + 1];
+        for (int i = 2; i <= N; i++) {
+            isPrime[i] = true;
+        }
+        
+        for (int i = 2; i * i <= N; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j <= N; j += i) {
+                    isPrime[j] = false;
+                }
+            }
         }
 
-        for (int i = M; i <= N; i++) {
-            if (isPrime(i)) {
+        for (int i = Math.max(M, 2); i <= N; i++) {
+            if (isPrime[i]) {
                 bw.write(i + "\n");
             }
         }
@@ -24,14 +32,5 @@ public class Main {
         bw.flush();
         br.close();
         bw.close();
-    }
-
-    private static boolean isPrime(int num) {
-        for (int i = 2; i <= Math.sqrt(num); i++) {
-            if (num % i == 0) {
-                return false;
-            }
-        }
-        return true;
     }
 }
