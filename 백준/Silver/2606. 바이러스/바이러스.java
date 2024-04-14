@@ -4,46 +4,46 @@ import java.util.List;
 
 public class Main {
     static List<List<Integer>> graph;
-    static boolean[] visited;
-    static int virus;
+    static boolean[] infected;
+    static int numInfected;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int N = Integer.parseInt(br.readLine()); // 정점 갯수
-        int M = Integer.parseInt(br.readLine()); // 간선 갯수
-        graph = new ArrayList<>(N + 1);
-        visited = new boolean[N + 1];
+        int numComputers = Integer.parseInt(br.readLine());
+        int numConnections = Integer.parseInt(br.readLine());
+        graph = new ArrayList<>(numComputers + 1);
+        infected = new boolean[numComputers + 1];
+        numInfected = -1;
 
-        for (int i = 0; i <= N; i++) {
+        for (int i = 0; i <= numComputers; i++) {
             graph.add(new ArrayList<>());
         }
 
-        for (int i = 0; i < M; i++) {
-            String[] edge = br.readLine().split(" ");
-            int vertex1 = Integer.parseInt(edge[0]);
-            int vertex2 = Integer.parseInt(edge[1]);
-            graph.get(vertex1).add(vertex2);
-            graph.get(vertex2).add(vertex1);
+        for (int i = 0; i < numConnections; i++) {
+            String[] connection = br.readLine().split(" ");
+            int computer1 = Integer.parseInt(connection[0]);
+            int computer2 = Integer.parseInt(connection[1]);
+            graph.get(computer1).add(computer2);
+            graph.get(computer2).add(computer1);
         }
 
         dfs(1);
-        bw.write(Integer.toString(virus - 1));
+        bw.write(Integer.toString(numInfected));
         bw.flush();
         br.close();
         bw.close();
     }
 
-    private static void dfs(int vertex) {
-        visited[vertex] = true;
-        virus++;
-        for (int adjVertex : graph.get(vertex)) {
-            if (!visited[adjVertex]) {
-                dfs(adjVertex);
+    private static void dfs(int computer) {
+        infected[computer] = true;
+        numInfected++;
+
+        for (int adjacent : graph.get(computer)) {
+            if (!infected[adjacent]) {
+                dfs(adjacent);
             }
         }
     }
 }
-
-
