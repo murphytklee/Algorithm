@@ -1,17 +1,12 @@
-import java.util.*;
-
 class Solution {
     public int solution(int[] array, int n) {
-        int arrLength = array.length;
-        Arrays.sort(array);
+        int answer = array[0];
+        int minDiff = Math.abs(n - array[0]);
 
-        int answer = array[arrLength - 1];
-        int min = Math.abs(n - array[arrLength - 1]);
-
-        for(int i = array.length - 2; i >= 0; i--){
+        for (int i = 1; i < array.length; i++) {
             int diff = Math.abs(n - array[i]);
-            if(diff <= min) {
-                min = diff;
+            if (diff < minDiff || (diff == minDiff && array[i] < answer)) {
+                minDiff = diff;
                 answer = array[i];
             }
         }
