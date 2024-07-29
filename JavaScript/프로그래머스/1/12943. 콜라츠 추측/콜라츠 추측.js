@@ -1,16 +1,13 @@
 function solution(num) {
-    let answer = 0;
-    while (num != 1) {
-        if (num % 2 == 0) {
-            num /= 2;
-        } else {
-            num = num * 3 + 1;
-        }
-        answer ++;
+    let count = 0;
 
-        if (answer > 500){
-            return -1;
+    while (count < 500) {
+        if (num === 1) {
+            return count;
         }
+        count ++;
+        num = num % 2 === 0 ? num /2 : num *3 +1;
     }
-    return answer;
+
+    return -1;
 }
