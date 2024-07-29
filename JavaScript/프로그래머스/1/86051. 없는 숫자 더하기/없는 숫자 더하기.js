@@ -1,9 +1,3 @@
 function solution(numbers) {
-    let answer = 45;
-
-    numbers.forEach(num => {
-        answer -= num;
-    });
-
-    return answer;
+    return 45 - numbers.reduce((cur, acc) => cur + acc, 0);
 }
