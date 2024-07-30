@@ -1,9 +1,3 @@
 function solution(s) {
-    let answer;
-    if (s.length % 2 == 0) {
-        answer = s.slice((s.length / 2) - 1, (s.length / 2) + 1);
-    } else {
-        answer = s.charAt(s.length / 2)
-    }
-    return answer;
+    return s.substr(Math.ceil(s.length / 2) - 1, s.length % 2 === 0 ? 2 : 1);
 }
