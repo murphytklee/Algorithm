@@ -1,14 +1,12 @@
 function solution(sizes) {
-    let answer = 0;
+    const sortedArr = sizes.map(([w, h]) => w < h ? [h, w] : [w, h]);
     let maxW = 0;
     let maxH = 0;
-    sizes.forEach(size => {
-        let w = Math.max(size[0],size[1]);
-        let h = Math.min(size[0],size[1]);
 
+    sortedArr.forEach(([w, h]) => {
         maxW = Math.max(maxW, w);
         maxH = Math.max(maxH, h);
     });
-    answer = maxW * maxH;
-    return answer;
+    
+    return maxW * maxH;
 }
