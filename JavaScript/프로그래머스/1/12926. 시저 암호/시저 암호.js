@@ -1,15 +1,20 @@
 function solution(s, n) {
-    return s.split('').map(char => {
-        const code = char.charCodeAt(0);
-        
-        if (code >= 65 && code <= 90) {
-            return String.fromCharCode(((code - 65 + n) % 26) + 65);
-        }
-        
-        else if (code >= 97 && code <= 122) {
-            return String.fromCharCode(((code - 97 + n) % 26) + 97);
-        }
+    let result = '';
 
-        return char;
-    }).join('');
+    for (let i = 0; i < s.length; i++) {
+        const char = s[i];
+        const ascii = char.charCodeAt(0);
+s
+        if (ascii >= 65 && ascii <= 90) {
+            result += String.fromCharCode(((ascii - 65 + n) % 26) + 65);
+        }
+        else if (ascii >= 97 && ascii <= 122) {
+            result += String.fromCharCode(((ascii - 97 + n) % 26) + 97);
+        }
+        else {
+            result += char;
+        }
+    }
+
+    return result;
 }
