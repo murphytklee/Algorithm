@@ -1,7 +1,10 @@
 function solution(numbers) {
-    const answer = numbers.flatMap((num, i) => 
-        numbers.slice(i + 1).map(otherNum => num + otherNum)
-    );
+    const answer = new Set();
 
-    return Array.from(new Set(answer)).sort((a, b) => a - b);
+    for (let i = 0; i < numbers.length; i++) {
+        for (let j = i + 1; j < numbers.length; j++) {
+            answer.add(numbers[i] + numbers[j]);
+        }
+    }
+    return [...answer].sort((a, b) => a - b);
 }
