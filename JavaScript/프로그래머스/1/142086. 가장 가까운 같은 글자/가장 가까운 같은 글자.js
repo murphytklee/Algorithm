@@ -1,17 +1,18 @@
 function solution(s) {
     let answer = [];
+    let lastSeen = {};
     
     for (let i = 0; i < s.length; i++) {
-        if (i == s.indexOf(s[i])) {
+        const char = s[i];
+
+        if (lastSeen[char] === undefined) {
             answer.push(-1);
         } else {
-            for (let j = i - 1; j >= 0; j--){
-                if (s[i] == s[j]) {
-                    answer.push(i - j);
-                    break;
-                }
-            }   
+            answer.push(i - lastSeen[char]);
         }
+        
+        lastSeen[char] = i;
     }
+    
     return answer;
 }
