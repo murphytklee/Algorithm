@@ -1,19 +1,7 @@
 function solution(name, yearning, photo) {
-    var answer = [];
-    let map = {};
-    
-    name.forEach((key, i) => {
-        map[key] = yearning[i];
-    });
-    
-    photo.forEach(row => {
-        let point = 0;
+    const map = Object.fromEntries(name.map((key, i) => [key, yearning[i]]));
 
-        row.forEach(key => {
-            point += map[key] == undefined ? 0 : map[key];
-        })
-        answer.push(point);
-    });
-
-    return answer;
+    return photo.map(row => 
+        row.reduce((acc, key) => acc + (map[key] || 0), 0)
+    );
 }
