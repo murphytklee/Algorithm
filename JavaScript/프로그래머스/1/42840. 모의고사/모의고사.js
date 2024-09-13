@@ -1,19 +1,22 @@
 function solution(answers) {
-    const supo1 = [1, 2, 3, 4, 5];
-    const supo2 = [2, 1, 2, 3, 2, 4, 2, 5];
-    const supo3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
+    let answer = [];
+    let a1 = [1, 2, 3, 4, 5];
+    let a2 = [2, 1, 2, 3, 2, 4, 2, 5];
+    let a3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
+    let a1l = a1.length, a2l = a2.length, a3l = a3.length;
+    let a1c = 0, a2c = 0, a3c = 0;
 
-    const counts = {1: 0, 2: 0, 3: 0};
+    answers.forEach((ans, i) => {
+        if (ans == a1[i % a1l]) { a1c++;}
+        if (ans == a2[i % a2l]) { a2c++;}
+        if (ans == a3[i % a3l]) { a3c++;}
+    });
 
-    for (let i = 0; i < answers.length; i++) {
-        if (answers[i] === supo1[i % supo1.length]) counts[1]++;
-        if (answers[i] === supo2[i % supo2.length]) counts[2]++;
-        if (answers[i] === supo3[i % supo3.length]) counts[3]++;
-    }
-    const maxCount = Math.max(...Object.values(counts));
+    var max = Math.max(a1c,a2c,a3c);
 
-    return Object.entries(counts)
-                 .filter(([, value]) => value === maxCount)
-                 .map(([key]) => Number(key))
-                 .sort((a, b) => a - b);
+    if (a1c === max) {answer.push(1)};
+    if (a2c === max) {answer.push(2)};
+    if (a3c === max) {answer.push(3)};
+
+    return answer;
 }
