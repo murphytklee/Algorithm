@@ -1,21 +1,16 @@
 function solution(number, limit, power) {
     let answer = 0;
-    for (let i = 1; i <= number; i++) {
-        const divisors = countDivisors(i);
-        answer +=  divisors > limit ? power : divisors;
-    }
-    return answer;
-}
+    const divisorsCount = Array(number + 1).fill(0);
 
-function countDivisors(num) {
-    let count = 0;
-    for (let i = 1; i <= Math.sqrt(num); i++) {
-        if (num % i === 0) {
-            count++;
-            if (i !== num / i) {
-                count++;
-            }
+    // 1부터 number까지 각 숫자의 약수를 미리 계산
+    for (let i = 1; i <= number; i++) {
+        for (let j = i; j <= number; j += i) {
+            divisorsCount[j]++;
         }
     }
-    return count;
+
+    for (let i = 1; i <= number; i++) {
+        answer += divisorsCount[i] > limit ? power : divisorsCount[i];
+    }
+    return answer;
 }
