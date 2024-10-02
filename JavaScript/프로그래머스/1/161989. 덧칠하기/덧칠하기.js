@@ -1,19 +1,13 @@
-function solution(n, m, section) {
-    var answer = 1;
-	let index = section.pop();
-	if (m == 1) {
-		return section.length + 1;
-	}
-
-	while (section.length > 0) {
-		let current = section.pop();
-
-		if (current >= index - (m - 1)) {
-			continue;
-		}
-		answer++;
-		index = current;
-	}
-
+function solution(n, m, sections) {
+    var answer = 0;
+    var painted = 0;
+    
+    for(var section of sections) {
+        if(painted < section) {
+            answer++;
+            painted = section + m - 1;
+        }
+    }
+    
     return answer;
 }
