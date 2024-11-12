@@ -1,7 +1,16 @@
 function solution(lottos, win_nums) {
-    const matches = lottos.filter(num => win_nums.includes(num) && num !== 0).length;
-    const unknowns = lottos.filter(num => num === 0).length;
+    let matches = 0;
+    let unknowns = 0;
+
+    for (let num of lottos) {
+        if (num === 0) {
+            unknowns++;
+        } else if (win_nums.includes(num)) {
+            matches++;
+        }
+    }
     const maxRank = Math.min(7 - (matches + unknowns), 6);
     const minRank = Math.min(7 - matches, 6);
+    
     return [maxRank, minRank];
 }
