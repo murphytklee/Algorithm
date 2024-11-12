@@ -1,19 +1,7 @@
 function solution(s, skip, index) {
-    const skipAsciiCode = [...skip].map(char => char.charCodeAt(0));
-    const answer = [...s].map(char => {
-        let newAscii = char.charCodeAt(0);
+    const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", 
+        "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", 
+        "u", "v", "w", "x", "y", "z"].filter(c => !skip.includes(c));
 
-        for (let i = 0; i < index; i++) {
-            newAscii++;
-            if (newAscii > 122) newAscii = 97;
-    
-            while (skipAsciiCode.includes(newAscii)) {
-                newAscii++;
-                if (newAscii > 122) newAscii = 97;
-            }
-        }
-        return String.fromCharCode(newAscii);
-    }).join('');
-
-    return answer;
+    return s.split("").map(c => alphabet[(alphabet.indexOf(c) + index) % alphabet.length]).join("");
 }
