@@ -1,22 +1,19 @@
 function solution(X, Y) {
-    const countX = new Map();
-    const countY = new Map();
+    const count = new Map();
     let answer = '';
 
     for (let num of X) {
-        countX.set(num, (countX.get(num) || 0) + 1);
+        count.set(num, (count.get(num) || 0) + 1);
     }
-
+    
     for (let num of Y) {
-        countY.set(num, (countY.get(num) || 0) + 1);
+        if (count.has(num) && count.get(num) > 0) {
+            count.set(num, count.get(num) - 1);
+            answer += num;
+        }
     }
 
-    for (let i = 9; i >= 0; i--) {
-        const digit = i.toString();
-        const minCount = Math.min(countX.get(digit) || 0, countY.get(digit) || 0);
-
-        answer += digit.repeat(minCount);
-    }
+    answer = [...answer].sort((a, b) => b - a).join('');
 
     return answer === '' ? "-1" : answer[0] === '0' ? "0" : answer;
 }
