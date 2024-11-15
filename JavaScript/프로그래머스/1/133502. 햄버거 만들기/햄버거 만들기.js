@@ -5,7 +5,7 @@ function solution(ingredient) {
     for (let ing of ingredient) {
         stack.push(ing);
         if (stack.length >= 4 && stack.slice(-4).join('') === '1231') {
-            stack.splice(-4);
+            stack.length -= 4;
             answer++;
         }
     }
