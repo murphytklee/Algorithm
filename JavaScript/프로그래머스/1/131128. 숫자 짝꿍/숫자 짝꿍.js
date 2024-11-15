@@ -1,25 +1,22 @@
 function solution(X, Y) {
-    const countObjX = new Map();
-    const countObjY = new Map();
+    const countX = new Map();
+    const countY = new Map();
     let answer = '';
 
     for (let num of X) {
-        countObjX.set(num, (countObjX.get(num) || 0) + 1);
+        countX.set(num, (countX.get(num) || 0) + 1);
     }
 
     for (let num of Y) {
-        countObjY.set(num, (countObjY.get(num) || 0) + 1);
+        countY.set(num, (countY.get(num) || 0) + 1);
     }
 
-    for (let i = 0; i < 10; i++) {
-        let x = countObjX.get(i.toString()) ?? 0;
-        let y = countObjY.get(i.toString()) ?? 0;
-        let minCount = Math.min(x, y);
+    for (let i = 9; i >= 0; i--) {
+        const digit = i.toString();
+        const minCount = Math.min(countX.get(digit) || 0, countY.get(digit) || 0);
 
-        answer += i.toString().repeat(minCount);
+        answer += digit.repeat(minCount);
     }
 
-    if (answer.length > 0 && answer.replaceAll('0', '').length == 0) return '0';
-    
-    return answer != '' ? [...answer].sort().reverse().join('') : '-1';
+    return answer === '' ? "-1" : answer[0] === '0' ? "0" : answer;
 }
